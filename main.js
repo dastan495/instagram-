@@ -63,7 +63,7 @@ btnAdd.addEventListener("click", async function () {
 });
 
 async function render() {
-  let products = await fetch(`${API}${searchVal}`)
+  let products = await fetch(`${API}?q=${searchVal}`)
     .then((res) => res.json())
     .catch((err) => console.log(err));
 
@@ -152,3 +152,8 @@ function deleteProduct(id) {
     method: "DELETE",
   }).then(() => render());
 }
+
+searchInp.addEventListener("input", () => {
+    searchVal = searchInp.value; // записывает знаение из посковика в переменную searchVal
+    render();
+  });
