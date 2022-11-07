@@ -1,4 +1,4 @@
-let KPI = "http://localhost:8000/products";
+let API = "http://localhost:8000/products";
 
 // ? вытаскивание для добавки студентов
 let name = document.querySelector("#name");
@@ -8,11 +8,15 @@ let weekKPI = document.querySelector("#weekKPI");
 let monthKPI = document.querySelector("#monthKPI");
 let btnAdd = document.querySelector("#btn-add");
 
-// ? место для карточек
-let students = document.querySelector("#students-book");
+let list = document.querySelector("#products-list");
+let tbody = document.querySelector("tbody")
+
+
+// let searchInp = document.querySelector("#search");
 let searchVal = "";
 
 btnAdd.addEventListener("click", async function () {
+  // ? формируем объукт с данным из инпутов
   let obj = {
     name: name.value,
     first: first.value,
@@ -20,7 +24,7 @@ btnAdd.addEventListener("click", async function () {
     weekKPI: weekKPI.value,
     monthKPI: monthKPI.value,
   };
-  // render();
+  render();
 
   if (
     !obj.name.trim() ||
@@ -29,75 +33,50 @@ btnAdd.addEventListener("click", async function () {
     !obj.weekKPI.trim() ||
     !obj.monthKPI.trim()
   ) {
-    alert("заполните данные студента");
+    alert("заполните поля");
     return;
   }
 
   await fetch(API, {
-    method: "POST",
+    method: "POST", // указываем метод
     headers: {
       "Content-Type": "application/json; charset = utf-8",
     },
     body: JSON.stringify(obj),
-  });
+ });
 
-  name.value = "";
-  first.value = "";
-  number.value = "";
-  weekKPI.value = "";
-  monthKPI.value = "";
+ name.value = "";
+ first.value = "";
+ number.value = "";
+ weekKPI.value = "";
+ monthKPI.value = "";
+
+ render()
 });
 
 async function render() {
-  let products = await fetch(`${API}${searchVal}`)
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
-
-  //   drawPaginationButtons();
-  list.innerHTML = "";
-  products.forEach((element) => {
-    let newE = document.createElement("table");
-    newE.id = element.id;
-
-    newE.innerHTML = `
-    <table class="table table-dark table-sm">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">LastName</th>
-        <th scope="col">Number</th>
-        <th scope="col">Weekly KPI</th>
-        <th scope="col">Monthly KPI</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>${element.name}</td>
-        <td>${element.first}</td>
-        <td>${element.number}</td>
-        <td>${element.}</td>
-        <td>..</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>..</td>
-        <td>..</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>..</td>
-        <td>..</td>
-      </tr>
-    </tbody>
-  </table>
-        `;
-  });
-}
+    let products = await fetch(
+      `${API}${searchVal}`
+    ) 
+      .then((res) => res.json()) 
+      .catch((err) => console.log(err)); 
+  
+    // drawPaginationButtons();
+    tbody.innerHTML = "";
+    products.forEach((element) => {
+      let newElem = document.createElement("tr");
+      newElem.id = element.id;
+      newElem.innerHTML = `
+          <th scope="row">${element.id}</th>
+          <td>${element.name}</td>
+          <td>${element.first}</td>
+          <td>${element.number}</td>
+          <td>${element.weekKPI}</td>
+          <td>${element.monthKPI}</td>
+      `;
+  
+      tbody.append(newElem);
+    });
+  }
+  
+  render();
