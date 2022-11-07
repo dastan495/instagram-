@@ -1,36 +1,28 @@
 {
   "products": [
     {
-      "name": "a",
-      "first": "a",
-      "number": "a",
-      "weekKPI": "a",
-      "monthKPI": "a",
-      "id": 1
-    },
-    {
       "name": "asd",
-      "first": "a",
-      "number": "a",
-      "weekKPI": "a",
-      "monthKPI": "asfd",
-      "id": 2
+      "first": "asd",
+      "number": "123",
+      "weekKPI": "123",
+      "monthKPI": "123",
+      "id": 9
     },
     {
-      "name": "das",
-      "first": "a",
-      "number": "a",
-      "weekKPI": "a",
-      "monthKPI": "a",
-      "id": 3
+      "name": "123",
+      "first": "123",
+      "number": "123",
+      "weekKPI": "123",
+      "monthKPI": "123",
+      "id": 10
     },
     {
-      "name": "alas",
-      "first": "alls",
-      "number": "lkfj",
-      "weekKPI": "aflf",
-      "monthKPI": "lfjal",
-      "id": 4
+      "name": "123",
+      "first": "123",
+      "number": "123",
+      "weekKPI": "123",
+      "monthKPI": "123",
+      "id": 11
     }
   ]
 }

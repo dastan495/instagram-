@@ -9,8 +9,16 @@ let monthKPI = document.querySelector("#monthKPI");
 let btnAdd = document.querySelector("#btn-add");
 
 let list = document.querySelector("#products-list");
-let tbody = document.querySelector("tbody")
+let tbody = document.querySelector("tbody");
 
+//? переменные дял инпутов: редактирование товаров
+let editName = document.querySelector("#edit-name");
+let editFirst = document.querySelector("#edit-lastname");
+let editNumber = document.querySelector("#edit-number");
+let editWeek = document.querySelector("#edit-week");
+let editMonth = document.querySelector("#edit-month");
+let editSaveBtn = document.querySelector("#btn-save-edit");
+let exampleModal = document.querySelector("#exampleModal");
 
 let searchInp = document.querySelector("#search");
 let searchVal = "";
@@ -43,18 +51,27 @@ btnAdd.addEventListener("click", async function () {
       "Content-Type": "application/json; charset = utf-8",
     },
     body: JSON.stringify(obj),
- });
+  });
 
- name.value = "";
- first.value = "";
- number.value = "";
- weekKPI.value = "";
- monthKPI.value = "";
+  name.value = "";
+  first.value = "";
+  number.value = "";
+  weekKPI.value = "";
+  monthKPI.value = "";
 
- render()
+  render();
 });
 
 async function render() {
+  let products = await fetch(`${API}${searchVal}`)
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+
+  tbody.innerHTML = "";
+  products.forEach((element) => {
+    let newElem = document.createElement("tr");
+    newElem.id = element.id;
+    newElem.innerHTML = `
     let products = await fetch(
         // console.log(products)
       `${API}?q=${searchVal}`
@@ -77,22 +94,77 @@ async function render() {
           </tr>
       <a href="#" id = ${element.id} onclick = 'deleteProduct(${element.id})' class="btn  bg-danger btn-danger btn-delete">Delete</a>
       <a href="#" id = ${element.id}  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn bg-primary btn-primary btn-edit">Edit</a>
+          <td>
+          
+          <a href="#" id=${element.id} data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn bg-primary btn-primary btn-edit">Edit</a>
+          <a href="#" id=${element.id} onclick='deleteProduct(${element.id})' class="btn bg-danger btn-danger btn-delete">Delete</a>
+          </td>
       `;
-  
-      tbody.append(newElem);
-    });
-  }
-  
-  render();
 
-  function deleteProduct(id) {
-    fetch(`${API}/${id}`, {
-      method: "DELETE",
-    }).then(() => render());
+    tbody.append(newElem);
+  });
+}
+
+render();
+
+//! рекдактирование продукта
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("btn-edit")) {
+    let id = e.target.id;
+    fetch(`${API}/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        editName.value = data.name;
+        editFirst.value = data.first;
+        editNumber.value = data.number;
+        editWeek.value = data.weekKPI;
+        editMonth.value = data.monthKPI;
+
+        editSaveBtn.setAttribute("id", data.id);
+      });
   }
-  
-//   ? search
-searchInp.addEventListener("input", () => {
-    searchVal = searchInp.value; // записывает знаение из посковика в переменную searchVal
+});
+
+//! сохранение изменений товара
+editSaveBtn.addEventListener("click", function () {
+  // console.log(this);
+  let id = this.id;
+
+  let name = editName.value;
+  let first = editFirst.value;
+  let number = editNumber.value;
+  let weekKPI = editWeek.value;
+  let monthKPI = editMonth.value;
+
+  if (!name || !first || !number || !weekKPI || !monthKPI) return;
+
+  let editedProduct = {
+    name: name,
+    first: first,
+    number: number,
+    weekKPI: weekKPI,
+    monthKPI: monthKPI,
+  };
+  saveEdit(editedProduct, id);
+});
+
+function saveEdit(editedProduct, id) {
+  fetch(`${API}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(editedProduct),
+  }).then(() => {
     render();
   });
+
+  let modal = bootstrap.Modal.getInstance(exampleModal);
+  modal.hide();
+}
+
+function deleteProduct(id) {
+  fetch(`${API}/${id}`, {
+    method: "DELETE",
+  }).then(() => render());
+}
