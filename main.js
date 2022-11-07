@@ -12,7 +12,7 @@ let list = document.querySelector("#products-list");
 let tbody = document.querySelector("tbody")
 
 
-// let searchInp = document.querySelector("#search");
+let searchInp = document.querySelector("#search");
 let searchVal = "";
 
 btnAdd.addEventListener("click", async function () {
@@ -56,7 +56,8 @@ btnAdd.addEventListener("click", async function () {
 
 async function render() {
     let products = await fetch(
-      `${API}${searchVal}`
+        // console.log(products)
+      `${API}?q=${searchVal}`
     ) 
       .then((res) => res.json()) 
       .catch((err) => console.log(err)); 
@@ -73,6 +74,9 @@ async function render() {
           <td>${element.number}</td>
           <td>${element.weekKPI}</td>
           <td>${element.monthKPI}</td>
+          </tr>
+      <a href="#" id = ${element.id} onclick = 'deleteProduct(${element.id})' class="btn  bg-danger btn-danger btn-delete">Delete</a>
+      <a href="#" id = ${element.id}  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn bg-primary btn-primary btn-edit">Edit</a>
       `;
   
       tbody.append(newElem);
@@ -80,3 +84,15 @@ async function render() {
   }
   
   render();
+
+  function deleteProduct(id) {
+    fetch(`${API}/${id}`, {
+      method: "DELETE",
+    }).then(() => render());
+  }
+  
+//   ? search
+searchInp.addEventListener("input", () => {
+    searchVal = searchInp.value; // записывает знаение из посковика в переменную searchVal
+    render();
+  });
