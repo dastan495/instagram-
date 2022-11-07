@@ -63,7 +63,7 @@ btnAdd.addEventListener("click", async function () {
 });
 
 async function render() {
-  let products = await fetch(`${API}${searchVal}`)
+  let products = await fetch(`${API}?q=${searchVal}`)
     .then((res) => res.json())
     .catch((err) => console.log(err));
 
@@ -72,28 +72,12 @@ async function render() {
     let newElem = document.createElement("tr");
     newElem.id = element.id;
     newElem.innerHTML = `
-    let products = await fetch(
-        // console.log(products)
-      `${API}?q=${searchVal}`
-    ) 
-      .then((res) => res.json()) 
-      .catch((err) => console.log(err)); 
-  
-    // drawPaginationButtons();
-    tbody.innerHTML = "";
-    products.forEach((element) => {
-      let newElem = document.createElement("tr");
-      newElem.id = element.id;
-      newElem.innerHTML = `
           <th scope="row">${element.id}</th>
           <td>${element.name}</td>
           <td>${element.first}</td>
           <td>${element.number}</td>
           <td>${element.weekKPI}</td>
           <td>${element.monthKPI}</td>
-          </tr>
-      <a href="#" id = ${element.id} onclick = 'deleteProduct(${element.id})' class="btn  bg-danger btn-danger btn-delete">Delete</a>
-      <a href="#" id = ${element.id}  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn bg-primary btn-primary btn-edit">Edit</a>
           <td>
           
           <a href="#" id=${element.id} data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn bg-primary btn-primary btn-edit">Edit</a>
@@ -168,3 +152,8 @@ function deleteProduct(id) {
     method: "DELETE",
   }).then(() => render());
 }
+
+searchInp.addEventListener("input", () => {
+    searchVal = searchInp.value; // записывает знаение из посковика в переменную searchVal
+    render();
+  });
