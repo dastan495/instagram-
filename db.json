@@ -1,1 +1,20 @@
-{ "products": [] }
+{
+  "products": [
+    {
+      "name": "asd",
+      "first": "asd",
+      "number": "213",
+      "weekKPI": "asd",
+      "monthKPI": "asd",
+      "id": 1
+    },
+    {
+      "name": "sad",
+      "first": "sad",
+      "number": "213",
+      "weekKPI": "sad",
+      "monthKPI": "asd",
+      "id": 2
+    }
+  ]
+}
