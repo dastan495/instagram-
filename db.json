@@ -1,44 +1,28 @@
 {
   "products": [
     {
-      "name": "l;f;ajg",
-      "first": "gsjka",
-      "number": "34567",
-      "weekKPI": ";fs",
-      "monthKPI": "gj;dk",
-      "id": 1
+      "name": "asd",
+      "first": "asd",
+      "number": "123",
+      "weekKPI": "123",
+      "monthKPI": "123",
+      "id": 9
     },
     {
-      "name": "A",
-      "first": "A",
-      "number": "2",
-      "weekKPI": "edq",
-      "monthKPI": "e",
-      "id": 2
+      "name": "123",
+      "first": "123",
+      "number": "123",
+      "weekKPI": "123",
+      "monthKPI": "123",
+      "id": 10
     },
     {
-      "name": "a",
-      "first": "h",
-      "number": "32",
-      "weekKPI": "csa",
-      "monthKPI": "csa",
-      "id": 3
-    },
-    {
-      "name": "sa",
-      "first": "scaac",
-      "number": "2321",
-      "weekKPI": "dwqdqwd",
-      "monthKPI": "edqwqeqw",
-      "id": 4
-    },
-    {
-      "name": "vbkl;",
-      "first": "skgq",
-      "number": "4325",
-      "weekKPI": "rpo",
-      "monthKPI": "er[",
-      "id": 5
+      "name": "123",
+      "first": "123",
+      "number": "123",
+      "weekKPI": "123",
+      "monthKPI": "123",
+      "id": 11
     }
   ]
 }
