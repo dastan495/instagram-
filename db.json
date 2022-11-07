@@ -1,28 +1,28 @@
 {
   "products": [
     {
-      "name": "123",
-      "first": "123",
-      "number": "123xcx",
-      "weekKPI": "123",
-      "monthKPI": "123",
-      "id": 11
+      "name": "dastan",
+      "first": "kamaak tuu",
+      "number": "09098009",
+      "weekKPI": "100",
+      "monthKPI": "100",
+      "id": 1
     },
     {
-      "name": "213",
-      "first": "123",
-      "number": "123123",
-      "weekKPI": "123",
-      "monthKPI": "123",
-      "id": 12
+      "name": "nurs",
+      "first": "moidunov",
+      "number": "923875",
+      "weekKPI": "34",
+      "monthKPI": "34",
+      "id": 2
     },
     {
-      "name": "fdklsj",
-      "first": "sdkljf",
-      "number": "alkfdja",
-      "weekKPI": "alkfj",
-      "monthKPI": "fldsj",
-      "id": 13
+      "name": "sultan",
+      "first": "kalnazarov",
+      "number": "834287",
+      "weekKPI": "0",
+      "monthKPI": "0",
+      "id": 3
     }
   ]
 }

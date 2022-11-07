@@ -11,7 +11,7 @@ let btnAdd = document.querySelector("#btn-add");
 let list = document.querySelector("#products-list");
 let tbody = document.querySelector("tbody");
 
-//? переменные дял инпутов: редактирование товаров
+//? переменные дял инпутов: редактирование студентов
 let editName = document.querySelector("#edit-name");
 let editFirst = document.querySelector("#edit-lastname");
 let editNumber = document.querySelector("#edit-number");
@@ -109,7 +109,7 @@ document.addEventListener("click", function (e) {
   }
 });
 
-//! сохранение изменений товара
+//! сохранение изменений
 editSaveBtn.addEventListener("click", function () {
   // console.log(this);
   let id = this.id;
@@ -154,6 +154,6 @@ function deleteProduct(id) {
 }
 
 searchInp.addEventListener("input", () => {
-    searchVal = searchInp.value; // записывает знаение из посковика в переменную searchVal
-    render();
-  });
+  searchVal = searchInp.value; // записывает знаение из посковика в переменную searchVal
+  render();
+});
